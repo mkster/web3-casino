@@ -47,6 +47,7 @@ public class Web3 : MonoBehaviour
     public TMP_Text tmWBalanceUser;
     public TMP_Text tmWBalanceCasino;
     public TMP_Text tmWalletUser;
+    public TMP_Text tmWalletCasino;
     public TMP_Text tmWBalanceGame20;
     public TMP_Text tmWon;
     public TMP_Dropdown tmToken;
@@ -61,6 +62,7 @@ public class Web3 : MonoBehaviour
         tmWBalanceUser.text = "";
         tmWBalanceCasino.text = "";
         tmWalletUser.text = "";
+        tmWalletCasino.text = "";
         tmWBalanceGame20.text = "";
         tmWon.text = "";
         activateOnWin.SetActive(false);
@@ -117,6 +119,8 @@ public class Web3 : MonoBehaviour
             activateOnWin.SetActive(false);
             slotsLoose.SetActive(false);
 
+
+            tmWon.text = "Gamble 1";
 
             //user to casino
             var res = await walletUser.Transfer(ActiveChainId, addressCasino, System.Numerics.BigInteger.Pow(10, 18));
@@ -198,6 +202,7 @@ public class Web3 : MonoBehaviour
         var privateKeyHex = "0x9aad452b463ded289bf97efe880b43b09d22bc60d80cfc8213362c4611ef587a"; // Should be securely stored and accessed
         walletCasino = await PrivateKeyWallet.Create(client, privateKeyHex);
         addressCasino = await walletCasino.GetAddress();
+        tmWalletCasino.text = addressCasino;
 
         await UpdateBalances();
         await FundUser();
